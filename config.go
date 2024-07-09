@@ -16,7 +16,9 @@ type Config struct {
 func NewConfig(configName string, configPaths []string) (*Config, error) {
 	var configData map[string]interface{}
 	for _, path := range configPaths {
-		fullPath := filepath.Join(path, configName)
+		// Expand environment variables in the path
+		expandedPath := os.ExpandEnv(path)
+		fullPath := filepath.Join(expandedPath, configName)
 		if _, err := os.Stat(fullPath); err == nil {
 			file, err := os.ReadFile(fullPath)
 			if err != nil {

@@ -28,7 +28,7 @@ import (
 )
 
 func main() {
-	configPaths := []string{"./config", "/etc/myapp"}
+	configPaths := []string{"./config", "/etc/myapp", "$HOME/.myapp","."}
 	cfg, err := config.NewConfig("config.json", configPaths)
 	if err != nil {
 		log.Fatalf("Error loading config: %v", err)
